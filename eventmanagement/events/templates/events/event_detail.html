@@ -18,6 +18,23 @@
             {% endfor %}
         </ul>
     </p>
+
+    {% if user.is_authenticated %}
+        {% if user in event.attendees.all %}
+            <a href="{% url 'events:unattend_event' event.pk %}">Unattend</a>
+        {% else %}
+            <a href="{% url 'events:attend_event' event.pk %}">Attend</a>
+        {% endif %}
+    {% endif %}
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <a href="{% url 'events:event_update' event.pk %}">Edit</a>
     <a href="{% url 'events:event_delete' event.pk %}">Delete</a>
     <a href="{% url 'events:event_list' %}">Back to list</a>
