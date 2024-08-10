@@ -34,7 +34,7 @@ def user_login(request):
             
             if user is not None:
                 login(request, user)
-                return redirect('users:success') 
+                return redirect('events:event_list') 
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -43,9 +43,3 @@ def user_login(request):
         form = AuthenticationForm()
 
     return render(request, 'login.html', {'form': form})
-
-
-@login_required(login_url='users:login')
-def success(request):
-
-    return render(request, 'success.html')

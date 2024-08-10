@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ event.title }}</title>
+</head>
+<body>
+    <h1>{{ event.title }}</h1>
+    <p><strong>Description:</strong> {{ event.description }}</p>
+    <p><strong>Date:</strong> {{ event.date }}</p>
+    <p><strong>Location:</strong> {{ event.location }}</p>
+    <p><strong>Owner:</strong> {{ event.owner.username }}</p>
+    <p><strong>Attendees:</strong>
+        <ul>
+            {% for attendee in event.attendees.all %}
+                <li>{{ attendee.username }}</li>
+            {% empty %}
+                <li>No attendees yet.</li>
+            {% endfor %}
+        </ul>
+    </p>
+    <a href="{% url 'events:event_update' event.pk %}">Edit</a>
+    <a href="{% url 'events:event_delete' event.pk %}">Delete</a>
+    <a href="{% url 'events:event_list' %}">Back to list</a>
+</body>
+</html>

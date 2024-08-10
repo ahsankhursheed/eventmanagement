@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event List</title>
+</head>
+<body>
+    <h1>Event List</h1>
+    
+    {% if is_authenticated %}
+        <a href="{% url 'events:event_create' %}">Create a new event</a>
+        <a href="{% url 'events:logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'users:login' %}">Login</a>
+    {% endif %}
+
+    <ul>
+        {% for event in events %}
+            <li>
+                <a href="{% url 'events:event_detail' event.pk %}">{{ event.title }}</a>
+                {% if is_authenticated %}
+                    <a href="{% url 'events:event_update' event.pk %}">Edit</a>
+                    <a href="{% url 'events:event_delete' event.pk %}">Delete</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No events available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
