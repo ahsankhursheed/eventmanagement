@@ -17,6 +17,7 @@ def event_detail(request, pk):
     return render(request, 'events/event_detail.html', {'event': event})
 
 
+@login_required(login_url='users:login')
 def event_create(request):
     if request.method == 'POST':
         form = EventForm(request.POST)
@@ -30,6 +31,7 @@ def event_create(request):
     return render(request, 'events/event_form.html', {'form': form})
 
 
+@login_required(login_url='users:login')
 def event_update(request, pk):
     event = get_object_or_404(Event, pk=pk)
     if request.method == 'POST':
@@ -42,6 +44,7 @@ def event_update(request, pk):
     return render(request, 'events/event_form.html', {'form': form})
 
 
+@login_required(login_url='users:login')
 def event_delete(request, pk):
     event = get_object_or_404(Event, pk=pk)
     if request.method == 'POST':
